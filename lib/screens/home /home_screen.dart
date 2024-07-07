@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: OutlinedButton(
                             onPressed: () {},
                             child: Text("Login"),
-                            style: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15),),
+                          //  style: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15),),
                           ),
                         )
                         // Text(
