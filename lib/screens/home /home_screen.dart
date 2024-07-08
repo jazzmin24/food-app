@@ -4,6 +4,8 @@ import 'package:food_app/config/colors.dart';
 import 'package:food_app/screens/home%20/drawer_side.dart';
 import 'package:food_app/screens/home%20/single_product.dart';
 import 'package:food_app/screens/product%20overview/product_overview.dart';
+import 'package:food_app/screens/review_cart/review_cart.dart';
+import 'package:food_app/screens/search/search.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -32,12 +34,11 @@ class _HomeScreenState extends State<HomeScreen> {
             backgroundColor: Color(0xffd6d382),
             child: IconButton(
               onPressed: () {
-                // Navigator.of(context).push(
-                //   MaterialPageRoute(
-                //     builder: (context) =>
-                //         Search(search: productProvider.gerAllProductSearch),
-                //   ),
-                // );
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => Search()
+                      // Search(search: productProvider.gerAllProductSearch),
+                      ),
+                );
               },
               icon: Icon(
                 Icons.search,
@@ -50,11 +51,11 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: EdgeInsets.symmetric(horizontal: 5.w),
             child: GestureDetector(
               onTap: () {
-                // Navigator.of(context).push(
-                //   MaterialPageRoute(
-                //     builder: (context) => ReviewCart(),
-                //   ),
-                // );
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ReviewCart(),
+                  ),
+                );
               },
               child: CircleAvatar(
                 backgroundColor: Color(0xffd6d382),
