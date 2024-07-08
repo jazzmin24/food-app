@@ -108,7 +108,6 @@ class DrawerSide extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => MyProfile()
-                      //   MyProfile(userProvider: widget.userProvider),
                       ),
                 );
               },

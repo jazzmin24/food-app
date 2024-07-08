@@ -7,14 +7,14 @@ enum SigninCharacter { fill, outline }
 class ProductOverview extends StatefulWidget {
   final String productName;
   final String productImage;
-  // final int productPrice;
+  final String productPrice;
   // final String productId;
   ProductOverview(
       {
-        //this.productId,
-         required this.productImage, required this.productName,
-         // this.productPrice
-         });
+      //this.productId,
+      required this.productImage,
+      required this.productName,
+      required this.productPrice});
 
   @override
   State<ProductOverview> createState() => _ProductOverviewState();
@@ -49,7 +49,6 @@ class _ProductOverviewState extends State<ProductOverview> {
 
   @override
   Widget build(BuildContext context) {
-    // WishListProvider wishListProvider = Provider.of(context);
     //getWishtListBool();
     return Scaffold(
       appBar: AppBar(
@@ -69,17 +68,16 @@ class _ProductOverviewState extends State<ProductOverview> {
               child: Column(
                 children: [
                   ListTile(
-                    title: Text(
-                         widget.productName
-                        ),
-                    subtitle: Text("\$50"),
+                    title: Text(widget.productName),
+                    subtitle: Text("\$${widget.productPrice}"
+                    ),
                   ),
                   Container(
                       height: 250,
                       padding: EdgeInsets.all(40),
                       child: Image.network(
-                       //  widget.productImage,
-                          widget.productImage ?? "", 
+                        //  widget.productImage,
+                        widget.productImage ?? "",
                       )),
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 20),
@@ -191,32 +189,21 @@ class _ProductOverviewState extends State<ProductOverview> {
       bottomNavigationBar: Row(
         children: [
           bottomNavigatorBar(
-            backgroundColor: textColor,
-            color: Colors.white70,
-            iconColor: Colors.grey,
-            title: "Add To WishList",
-            iconData:
-                // wishListBool == false?
-                Icons.favorite_outline
-            // : Icons.favorite
-            ,
-            // onTap: () {
-            //   setState(() {
-            //     wishListBool = !wishListBool;
-            //   });
-            //   if (wishListBool == true) {
-            //     wishListProvider.addWishListData(
-            //       wishListId: widget.productId,
-            //       wishListImage: widget.productImage,
-            //       wishListName: widget.productName,
-            //       wishListPrice: widget.productPrice,
-            //       wishListQuantity: 2,
-            //     );
-            //   } else {
-            //     wishListProvider.deleteWishtList(widget.productId);
-            //   }
-            // }
-          ),
+              backgroundColor: textColor,
+              color: Colors.white70,
+              iconColor: Colors.grey,
+              title: "Add To WishList",
+              iconData:
+                  // wishListBool == false?
+                  Icons.favorite_outline
+              // : Icons.favorite
+              // onTap: () {
+              //   setState(() {
+              //     wishListBool = !wishListBool;
+              //   });
+
+              // }
+              ),
           bottomNavigatorBar(
             backgroundColor: primaryColor,
             color: textColor,

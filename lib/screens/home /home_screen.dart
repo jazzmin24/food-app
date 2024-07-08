@@ -1,11 +1,14 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_app/config/colors.dart';
+import 'package:food_app/provider/product_provider.dart';
 import 'package:food_app/screens/home%20/drawer_side.dart';
 import 'package:food_app/screens/home%20/single_product.dart';
 import 'package:food_app/screens/product%20overview/product_overview.dart';
 import 'package:food_app/screens/review_cart/review_cart.dart';
 import 'package:food_app/screens/search/search.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,11 +19,25 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+  void initState() {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      Provider.of<ProductProvider>(context, listen: false)
+          .fetchHerbsProductData();
+      Provider.of<ProductProvider>(context, listen: false)
+          .fetchFreshProductData();
+      Provider.of<ProductProvider>(context, listen: false)
+          .fetchRootProductData();
+    });
+    super.initState();
+
+    //Using listen: false:  When you want to fetch data or trigger an action from a
+    //provider but don't need to rebuild the UI immediately based on that change.
+  }
+
+  @override
   Widget build(BuildContext context) {
+    // log("valuenhd${Provider.of<ProductProvider>(context, listen: false).herbsProductList.toString()}");
     return Scaffold(
-      // drawer: DrawerSide(
-      //   userProvider: userProvider,
-      // ),
       drawer: DrawerSide(),
       appBar: AppBar(
         iconTheme: IconThemeData(color: textColor),
@@ -35,9 +52,12 @@ class _HomeScreenState extends State<HomeScreen> {
             child: IconButton(
               onPressed: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => Search()
-                      // Search(search: productProvider.gerAllProductSearch),
-                      ),
+                  MaterialPageRoute(
+                      builder: (context) => Search(
+                            search: Provider.of<ProductProvider>(context,
+                                    listen: false)
+                                .getAllProductsSearch,
+                          )),
                 );
               },
               icon: Icon(
@@ -71,7 +91,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         backgroundColor: primaryColor,
       ),
-
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
         child: ListView(
@@ -190,13 +209,14 @@ Widget _buildHerbsProduct(context) {
             ),
             GestureDetector(
               onTap: () {
-                // Navigator.of(context).push(
-                //   MaterialPageRoute(
-                //     builder: (context) => Search(
-                //       search: productProvider.getHerbsProductDataList,
-                //     ),
-                //   ),
-                // );
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => Search(
+                      search: Provider.of<ProductProvider>(context)
+                          .herbsProductList,
+                    ),
+                  ),
+                );
               },
               child: Text(
                 'view all',
@@ -210,65 +230,66 @@ Widget _buildHerbsProduct(context) {
       SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
-          children: [
-            SingleProduct(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => ProductOverview(
-                            productImage:
-                                'https://assets.stickpng.com/images/58bf1e2ae443f41d77c734ab.png',
-                            productName: 'Fresh Basil',
-                          )));
-                },
-                productImage:
-                    'https://assets.stickpng.com/images/58bf1e2ae443f41d77c734ab.png',
-                productName: 'Fresh Basil'),
-            SingleProduct(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => ProductOverview(
-                          productImage:
-                              'https://pngimg.com/uploads/mint/small/mint_PNG36.png',
-                          productName: 'Fresh Mint')));
-                },
-                productImage:
-                    'https://pngimg.com/uploads/mint/small/mint_PNG36.png',
-                productName: 'Fresh Mint'),
-            SingleProduct(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => ProductOverview(
-                          productImage:
-                              'https://www.pngarts.com/files/5/Rosemary-Transparent-Image.png',
-                          productName: 'Rose Merry')));
-                },
-                productImage:
-                    'https://www.pngarts.com/files/5/Rosemary-Transparent-Image.png',
-                productName: 'Rose Merry'),
-          ],
-          // children: productProvider.getHerbsProductDataList.map(
-          //   (herbsProductData) {
-          //     return SingleProduct(
+          // children: [
+          //   SingleProduct(
           //       onTap: () {
-          //         Navigator.of(context).push(
-          //           MaterialPageRoute(
+          //         Navigator.of(context).push(MaterialPageRoute(
           //             builder: (context) => ProductOverview(
-          //               productId: herbsProductData.productId,
-          //               productPrice: herbsProductData.productPrice,
-          //               productName: herbsProductData.productName,
-          //               productImage: herbsProductData.productImage,
-          //             ),
-          //           ),
-          //         );
+          //                   productImage:
+          //                       'https://assets.stickpng.com/images/58bf1e2ae443f41d77c734ab.png',
+          //                   productName: 'Fresh Basil',
+          //                 )));
           //       },
-          //       productId: herbsProductData.productId,
-          //       productPrice: herbsProductData.productPrice,
-          //       productImage: herbsProductData.productImage,
-          //       productName: herbsProductData.productName,
-          //       productUnit: herbsProductData,
-          //     );
-          //   },
-          // ).toList(),
+          //       productImage:
+          //           'https://assets.stickpng.com/images/58bf1e2ae443f41d77c734ab.png',
+          //       productName: 'Fresh Basil'),
+          //   SingleProduct(
+          //       onTap: () {
+          //         Navigator.of(context).push(MaterialPageRoute(
+          //             builder: (context) => ProductOverview(
+          //                 productImage:
+          //                     'https://pngimg.com/uploads/mint/small/mint_PNG36.png',
+          //                 productName: 'Fresh Mint')));
+          //       },
+          //       productImage:
+          //           'https://pngimg.com/uploads/mint/small/mint_PNG36.png',
+          //       productName: 'Fresh Mint'),
+          //   SingleProduct(
+          //       onTap: () {
+          //         Navigator.of(context).push(MaterialPageRoute(
+          //             builder: (context) => ProductOverview(
+          //                 productImage:
+          //                     'https://www.pngarts.com/files/5/Rosemary-Transparent-Image.png',
+          //                 productName: 'Rose Merry')));
+          //       },
+          //       productImage:
+          //           'https://www.pngarts.com/files/5/Rosemary-Transparent-Image.png',
+          //       productName: 'Rose Merry'),
+          // ],
+
+          children: Provider.of<ProductProvider>(context).herbsProductList.map(
+            (herbsProductData) {
+              return SingleProduct(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ProductOverview(
+                        // productId: herbsProductData.productId,
+                        productPrice: herbsProductData.productPrice,
+                        productName: herbsProductData.productName,
+                        productImage: herbsProductData.productImage,
+                      ),
+                    ),
+                  );
+                },
+                //productId: herbsProductData.productId,
+                productPrice: herbsProductData.productPrice,
+                productImage: herbsProductData.productImage,
+                productName: herbsProductData.productName,
+                //productUnit: herbsProductData,
+              );
+            },
+          ).toList(),
         ),
       ),
     ],
@@ -290,13 +311,14 @@ Widget _buildFreshProduct(context) {
             ),
             GestureDetector(
               onTap: () {
-                // Navigator.of(context).push(
-                //   MaterialPageRoute(
-                //     builder: (context) => Search(
-                //       search: productProvider.getHerbsProductDataList,
-                //     ),
-                //   ),
-                // );
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => Search(
+                      search: Provider.of<ProductProvider>(context)
+                          .freshProductList,
+                    ),
+                  ),
+                );
               },
               child: Text(
                 'view all',
@@ -310,64 +332,29 @@ Widget _buildFreshProduct(context) {
       SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
-          children: [
-            SingleProduct(
+          children: Provider.of<ProductProvider>(context).freshProductList.map(
+            (freshProductData) {
+              return SingleProduct(
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
                       builder: (context) => ProductOverview(
-                          productImage:
-                              'https://www.pngmart.com/files/3/Watermelon-PNG-Photos.png',
-                          productName: 'Watermelon')));
+                        //productId: freshProductData.productId,
+                        productPrice: freshProductData.productPrice,
+                        productName: freshProductData.productName,
+                        productImage: freshProductData.productImage,
+                      ),
+                    ),
+                  );
                 },
-                productImage:
-                    'https://www.pngmart.com/files/3/Watermelon-PNG-Photos.png',
-                productName: 'Watermelon'),
-            SingleProduct(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => ProductOverview(
-                          productImage:
-                              'https://www.pngall.com/wp-content/uploads/2016/04/Grape-Transparent.png',
-                          productName: 'Grapes')));
-                },
-                productImage:
-                    'https://www.pngall.com/wp-content/uploads/2016/04/Grape-Transparent.png',
-                productName: 'Grapes'),
-            SingleProduct(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => ProductOverview(
-                          productImage:
-                              'https://pluspng.com/img-png/mango-hd-png-mango-transparent-png-image-1000.png',
-                          productName: 'Mango')));
-                },
-                productImage:
-                    'https://pluspng.com/img-png/mango-hd-png-mango-transparent-png-image-1000.png',
-                productName: 'Mango'),
-          ],
-          // children: productProvider.getHerbsProductDataList.map(
-          //   (herbsProductData) {
-          //     return SingleProduct(
-          //       onTap: () {
-          //         Navigator.of(context).push(
-          //           MaterialPageRoute(
-          //             builder: (context) => ProductOverview(
-          //               productId: herbsProductData.productId,
-          //               productPrice: herbsProductData.productPrice,
-          //               productName: herbsProductData.productName,
-          //               productImage: herbsProductData.productImage,
-          //             ),
-          //           ),
-          //         );
-          //       },
-          //       productId: herbsProductData.productId,
-          //       productPrice: herbsProductData.productPrice,
-          //       productImage: herbsProductData.productImage,
-          //       productName: herbsProductData.productName,
-          //       productUnit: herbsProductData,
-          //     );
-          //   },
-          // ).toList(),
+                //productId: freshProductData.productId,
+                productPrice: freshProductData.productPrice,
+                productImage: freshProductData.productImage,
+                productName: freshProductData.productName,
+                //productUnit: freshProductData,
+              );
+            },
+          ).toList(),
         ),
       ),
     ],
@@ -389,13 +376,14 @@ Widget _buildRootProduct(context) {
             ),
             GestureDetector(
               onTap: () {
-                // Navigator.of(context).push(
-                //   MaterialPageRoute(
-                //     builder: (context) => Search(
-                //       search: productProvider.getHerbsProductDataList,
-                //     ),
-                //   ),
-                // );
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => Search(
+                      search:
+                          Provider.of<ProductProvider>(context).rootProductList,
+                    ),
+                  ),
+                );
               },
               child: Text(
                 'view all',
@@ -409,64 +397,29 @@ Widget _buildRootProduct(context) {
       SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
-          children: [
-            SingleProduct(
+          children: Provider.of<ProductProvider>(context).rootProductList.map(
+            (rootProductData) {
+              return SingleProduct(
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
                       builder: (context) => ProductOverview(
-                          productImage:
-                              'https://pngimg.com/uploads/beet/small/beet_PNG44.png',
-                          productName: 'Beetroot')));
+                        //productId: rootProductData.productId,
+                        productPrice: rootProductData.productPrice,
+                        productName: rootProductData.productName,
+                        productImage: rootProductData.productImage,
+                      ),
+                    ),
+                  );
                 },
-                productImage:
-                    'https://pngimg.com/uploads/beet/small/beet_PNG44.png',
-                productName: 'Beetroot'),
-            SingleProduct(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => ProductOverview(
-                          productImage:
-                              'https://pngimg.com/uploads/celery/small/celery_PNG29.png',
-                          productName: 'Celery')));
-                },
-                productImage:
-                    'https://pngimg.com/uploads/celery/small/celery_PNG29.png',
-                productName: 'Celery'),
-            SingleProduct(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => ProductOverview(
-                          productImage:
-                              'https://pluspng.com/img-png/carrot-hd-png-havuc-png-resmi-carrot-png-600.png',
-                          productName: 'Carrot')));
-                },
-                productImage:
-                    'https://pluspng.com/img-png/carrot-hd-png-havuc-png-resmi-carrot-png-600.png',
-                productName: 'Carrot'),
-          ],
-          // children: productProvider.getHerbsProductDataList.map(
-          //   (herbsProductData) {
-          //     return SingleProduct(
-          //       onTap: () {
-          //         Navigator.of(context).push(
-          //           MaterialPageRoute(
-          //             builder: (context) => ProductOverview(
-          //               productId: herbsProductData.productId,
-          //               productPrice: herbsProductData.productPrice,
-          //               productName: herbsProductData.productName,
-          //               productImage: herbsProductData.productImage,
-          //             ),
-          //           ),
-          //         );
-          //       },
-          //       productId: herbsProductData.productId,
-          //       productPrice: herbsProductData.productPrice,
-          //       productImage: herbsProductData.productImage,
-          //       productName: herbsProductData.productName,
-          //       productUnit: herbsProductData,
-          //     );
-          //   },
-          // ).toList(),
+                //productId: rootProductData.productId,
+                productPrice: rootProductData.productPrice,
+                productImage: rootProductData.productImage,
+                productName: rootProductData.productName,
+                //productUnit: rootProductData,
+              );
+            },
+          ).toList(),
         ),
       ),
     ],

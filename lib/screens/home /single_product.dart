@@ -6,18 +6,20 @@ class SingleProduct extends StatefulWidget {
   final VoidCallback? onTap;
   final String productImage;
   final String productName;
-  // final int productPrice;
-
+  final String productPrice;
   // final String productId;
   // final ProductModel productUnit;
   SingleProduct({
-    //this.productId,
+   
     required this.onTap,
     required this.productImage,
     required this.productName,
+        required this.productPrice
+
+      //this.productId,   
     //this.productUnit,
 
-    //this.productPrice
+
   });
 
   @override
@@ -77,7 +79,7 @@ class _SingleProductState extends State<SingleProduct> {
                           ),
                         ),
                         Text(
-                          '50\$/50 Gram',
+                          '${widget.productPrice}\$/50 Gram',
                           //  '${widget.productPrice}\$/${unitData == null ? firstValue : unitData}',
                           style: TextStyle(
                             color: Colors.grey,

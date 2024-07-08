@@ -5,8 +5,7 @@ import 'package:food_app/config/colors.dart';
 import 'package:food_app/screens/home%20/drawer_side.dart';
 
 class MyProfile extends StatefulWidget {
-  // UserProvider userProvider;
-  // MyProfile({this.userProvider});
+ 
 
   @override
   _MyProfileState createState() => _MyProfileState();
@@ -15,7 +14,6 @@ class MyProfile extends StatefulWidget {
 class _MyProfileState extends State<MyProfile> {
   @override
   Widget build(BuildContext context) {
-    // var userData = widget.userProvider.currentUserData;
 
     return Scaffold(
       backgroundColor: primaryColor,
@@ -30,7 +28,6 @@ class _MyProfileState extends State<MyProfile> {
         ),
       ),
       drawer: DrawerSide(
-          // userProvider: widget.userProvider,
           ),
       body: Stack(
         children: [

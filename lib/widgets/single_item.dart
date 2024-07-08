@@ -4,22 +4,26 @@ import 'package:food_app/config/colors.dart';
 
 class SingleItem extends StatelessWidget {
   bool? isBool = false;
-  SingleItem({this.isBool});
+  String? productImage;
+  String? productName;
+  String? productPrice;
+
+  SingleItem(
+      {this.isBool, this.productImage, this.productName, this.productPrice});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
+          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
           child: Row(
             children: [
               Expanded(
                   child: Container(
-                height: 110.h,
+                height: 120.h,
                 child: Center(
-                  child: Image.network(
-                      'https://pngimg.com/uploads/beet/small/beet_PNG44.png'),
+                  child: Image.network(productImage!),
                 ),
               )),
               SizedBox(width: 13.w),
@@ -34,12 +38,12 @@ class SingleItem extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(height: 5.h),
-                          Text('productname',
+                          Text(productName!,
                               style: TextStyle(
                                   color: textColor,
                                   fontWeight: FontWeight.bold)),
                           SizedBox(height: 5.h),
-                          Text('50\$/50 Gram',
+                          Text('$productPrice\$/50 Gram',
                               style: TextStyle(color: Colors.grey)),
                           SizedBox(height: 10.h),
                           isBool == false

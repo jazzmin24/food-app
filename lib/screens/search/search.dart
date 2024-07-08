@@ -1,28 +1,32 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_app/config/colors.dart';
+import 'package:food_app/models/product_model.dart';
 import 'package:food_app/widgets/single_item.dart';
 
+
 class Search extends StatefulWidget {
-  // final List<ProductModel> search;
-  // Search({this.search});
+  final List<ProductModel>? search;
+  Search({this.search});
   @override
   _SearchState createState() => _SearchState();
 }
 
 class _SearchState extends State<Search> {
-  // String query = "";
+  String query = "";
 
-  // SingleItem(String query) {
-  //   List<ProductModel> searchFood = widget.search.where((element) {
-  //     return element.productName.toLowerCase().contains(query);
-  //   }).toList();
-  //   return searchFood;
-  // }
+  searchItem(String query) {
+    List<ProductModel> searchFood = widget.search!.where((element) {
+      return element.productName.toLowerCase().contains(query);
+    }).toList();
+    return searchFood;
+  }
 
   @override
   Widget build(BuildContext context) {
-    //  List<ProductModel> _SingleItem = SingleItem(query);
+    List<ProductModel> _searchItem = searchItem(query);
     return Scaffold(
       appBar: AppBar(
         title: Text("Search"),
@@ -47,9 +51,10 @@ class _SearchState extends State<Search> {
             margin: EdgeInsets.symmetric(horizontal: 20.w),
             child: TextField(
               onChanged: (value) {
-                // setState(() {
-                //   query = value;
-                // });
+                print(value);
+                setState(() {
+                  query = value;
+                });
               },
               decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -66,16 +71,16 @@ class _SearchState extends State<Search> {
             ),
           ),
           SizedBox(height: 10.h),
-          SingleItem(),
-          SingleItem(), SingleItem(), SingleItem(), SingleItem(),
-          // _SingleItem.map((data) {
-          //   return SingleItem(
-          //     isBool: false,
-          //     productImage: data.productImage,
-          //     productName: data.productName,
-          //     productPrice: data.productPrice,
-          //   );
-          // }).toList(),
+          Column(
+            children: _searchItem.map((data) {
+              return SingleItem(
+                isBool: false,
+                productImage: data.productImage,
+                productName: data.productName,
+                productPrice: data.productPrice,
+              );
+            }).toList(),
+          )
         ],
       ),
     );
