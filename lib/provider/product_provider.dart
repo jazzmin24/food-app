@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/models/product_model.dart';
@@ -69,3 +67,13 @@ List<ProductModel> search = [];
     notifyListeners();
   }
 }
+
+
+
+
+// Immutable Operation: When fetching data asynchronously (as in
+// fetchFreshProductData), it's generally safer to modify a local
+// list (newList) before assigning it to the class-level list 
+// (freshProductList). This approach ensures that any changes to the
+// list are atomic and do not introduce unexpected behavior during
+// iteration or modification.

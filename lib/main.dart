@@ -6,7 +6,6 @@ import 'package:food_app/config/colors.dart';
 import 'package:food_app/firebase_options.dart';
 import 'package:food_app/provider/product_provider.dart';
 import 'package:food_app/provider/user_provider.dart';
-import 'package:food_app/screens/home%20/home_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -37,7 +36,7 @@ class MyApp extends StatelessWidget {
               primaryColor: primaryColor,
               scaffoldBackgroundColor: scaffoldBackgroundColor),
           debugShowCheckedModeBanner: false,
-          home: const HomeScreen(),
+          home: const SignIn(),
         ),
       ),
     );

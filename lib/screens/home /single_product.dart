@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_app/config/colors.dart';
+import 'package:food_app/widgets/count.dart';
 
 class SingleProduct extends StatefulWidget {
   final VoidCallback? onTap;
@@ -9,18 +11,16 @@ class SingleProduct extends StatefulWidget {
   final String productPrice;
   // final String productId;
   // final ProductModel productUnit;
-  SingleProduct({
-   
-    required this.onTap,
-    required this.productImage,
-    required this.productName,
-        required this.productPrice
+  SingleProduct(
+      {required this.onTap,
+      required this.productImage,
+      required this.productName,
+      required this.productPrice
 
-      //this.productId,   
-    //this.productUnit,
+      //this.productId,
+      //this.productUnit,
 
-
-  });
+      });
 
   @override
   _SingleProductState createState() => _SingleProductState();
@@ -154,25 +154,9 @@ class _SingleProductState extends State<SingleProduct> {
                                 // ),
                                 ),
                             SizedBox(width: 5.w),
-                            Container(
-                              height: 25.h,
-                              width: 50.w,
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(8)),
-                              child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(Icons.remove,
-                                        size: 15.sp, color: primaryColor),
-                                    Text('1',
-                                        style: TextStyle(
-                                            color: primaryColor,
-                                            fontWeight: FontWeight.bold)),
-                                    Icon(Icons.add,
-                                        size: 15.sp, color: primaryColor)
-                                  ]),
-                            )
+
+                            Count()
+
                             // Count(
                             //   productId: widget.productId,
                             //   productImage: widget.productImage,

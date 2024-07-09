@@ -2,12 +2,48 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+//Encapsulation: The method addUserData is designed to be reusable and 
+//self-contained. By making its requirements explicit, it becomes easier 
+//to use and understand in different contexts, beyond just the current scenario.
+
 class UserProvider with ChangeNotifier {
+  Future<void> addUserData({
+    required User currentUser,
+    required String userName,
+    required String userImage,
+    required String userEmail,
+  }) async {
+    await FirebaseFirestore.instance
+        .collection("usersData")
+        .doc(currentUser.uid)
+        .set(
+      {
+        "userName": userName,
+        "userEmail": userEmail,
+        "userImage": userImage,
+        "userUid": currentUser.uid,
+      },
+    );
+  }
+}
+
+
+
+
+
+
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:flutter/material.dart';
+
+// class UserProvider with ChangeNotifier {
+
+
 // void addUserData({
-//     User currentUser,
-//     String userName,
-//     String userImage,
-//     String userEmail,
+//       User currentUser,
+//       String userName,
+//       String userImage,
+//       String userEmail,
 //   }) async {
 //     await FirebaseFirestore.instance
 //         .collection("usersData")
@@ -21,4 +57,5 @@ class UserProvider with ChangeNotifier {
 //       },
 //     );
 //   }
-}
+
+// }
