@@ -6,7 +6,6 @@ import 'package:food_app/config/colors.dart';
 import 'package:food_app/models/product_model.dart';
 import 'package:food_app/widgets/single_item.dart';
 
-
 class Search extends StatefulWidget {
   final List<ProductModel>? search;
   Search({this.search});
@@ -77,7 +76,9 @@ class _SearchState extends State<Search> {
                 isBool: false,
                 productImage: data.productImage,
                 productName: data.productName,
-                productPrice: data.productPrice,
+                productPrice: data.productPrice, productId: data.productId,
+                productQuantity: data.productQuantity,
+                //wishList: true,
               );
             }).toList(),
           )

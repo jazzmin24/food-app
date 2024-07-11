@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_app/config/colors.dart';
+import 'package:food_app/models/user_model.dart';
+import 'package:food_app/provider/user_provider.dart';
 import 'package:food_app/screens/home%20/drawer_side.dart';
+import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class MyProfile extends StatefulWidget {
- 
-
+  UserModel userData;
+  MyProfile({required this.userData});
   @override
   _MyProfileState createState() => _MyProfileState();
 }
@@ -14,7 +18,8 @@ class MyProfile extends StatefulWidget {
 class _MyProfileState extends State<MyProfile> {
   @override
   Widget build(BuildContext context) {
-
+    UserProvider userProvider = Provider.of<UserProvider>(context);
+    userProvider.currentUserData;
     return Scaffold(
       backgroundColor: primaryColor,
       appBar: AppBar(
@@ -28,7 +33,8 @@ class _MyProfileState extends State<MyProfile> {
         ),
       ),
       drawer: DrawerSide(
-          ),
+        userProvider: userProvider,
+      ),
       body: Stack(
         children: [
           Column(
@@ -66,17 +72,14 @@ class _MyProfileState extends State<MyProfile> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Jasmin',
-                                      // userData.userName,
+                                      widget.userData.userName,
                                       style: TextStyle(
                                           fontSize: 14.sp,
                                           fontWeight: FontWeight.bold,
                                           color: textColor),
                                     ),
                                     SizedBox(height: 10.h),
-                                    Text('jasmin11@gmail.com'
-                                        // userData.userEmail
-                                        ),
+                                    Text(widget.userData.userEmail),
                                   ],
                                 ),
                                 CircleAvatar(
@@ -123,8 +126,8 @@ class _MyProfileState extends State<MyProfile> {
               backgroundColor: primaryColor,
               child: CircleAvatar(
                   backgroundImage: NetworkImage(
-                    //  userData.userImage ??
-                    "https://s3.envato.com/files/328957910/vegi_thumb.png",
+                    widget.userData.userImage ??
+                        "https://s3.envato.com/files/328957910/vegi_thumb.png",
                   ),
                   radius: 45,
                   backgroundColor: scaffoldBackgroundColor),

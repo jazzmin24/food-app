@@ -25,7 +25,7 @@ List<ProductModel> search = [];
     QuerySnapshot<Map<String, dynamic>> value =
         await FirebaseFirestore.instance.collection("HerbsProduct").get();
     value.docs.forEach((element) {
-      print(element.data());
+      //print(element.data());
       ProductModel productModel = ProductModel.fromJson(element.data());
       newList.add(productModel);
     });

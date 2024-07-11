@@ -1,8 +1,10 @@
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_app/config/colors.dart';
 import 'package:food_app/provider/product_provider.dart';
+import 'package:food_app/provider/user_provider.dart';
 import 'package:food_app/screens/home%20/drawer_side.dart';
 import 'package:food_app/screens/home%20/single_product.dart';
 import 'package:food_app/screens/product%20overview/product_overview.dart';
@@ -18,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  //sbse phle call hoga before everything so that data time pr retrive hi aur display hoje
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -27,18 +30,21 @@ class _HomeScreenState extends State<HomeScreen> {
           .fetchFreshProductData();
       Provider.of<ProductProvider>(context, listen: false)
           .fetchRootProductData();
+                Provider.of<UserProvider>(context, listen: false).getUserData();
+
     });
     super.initState();
 
-    //Using listen: false:  When you want to fetch data or trigger an action from a
+    //Using listen: false:  When you want to fetch data cor trigger an action from a
     //provider but don't need to rebuild the UI immediately based on that change.
   }
 
   @override
   Widget build(BuildContext context) {
-    // log("valuenhd${Provider.of<ProductProvider>(context, listen: false).herbsProductList.toString()}");
-    return Scaffold(
-      drawer: DrawerSide(),
+    UserProvider userProvider =
+        Provider.of<UserProvider>(context);
+       return Scaffold(
+      drawer: DrawerSide(userProvider: userProvider),
       appBar: AppBar(
         iconTheme: IconThemeData(color: textColor),
         title: Text(
@@ -91,6 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         backgroundColor: primaryColor,
       ),
+      
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
         child: ListView(
@@ -190,6 +197,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+   
     );
   }
 }
@@ -274,7 +282,7 @@ Widget _buildHerbsProduct(context) {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => ProductOverview(
-                        // productId: herbsProductData.productId,
+                        productId: herbsProductData.productId,
                         productPrice: herbsProductData.productPrice,
                         productName: herbsProductData.productName,
                         productImage: herbsProductData.productImage,
@@ -282,7 +290,7 @@ Widget _buildHerbsProduct(context) {
                     ),
                   );
                 },
-                //productId: herbsProductData.productId,
+                productId: herbsProductData.productId,
                 productPrice: herbsProductData.productPrice,
                 productImage: herbsProductData.productImage,
                 productName: herbsProductData.productName,
@@ -339,7 +347,7 @@ Widget _buildFreshProduct(context) {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => ProductOverview(
-                        //productId: freshProductData.productId,
+                        productId: freshProductData.productId,
                         productPrice: freshProductData.productPrice,
                         productName: freshProductData.productName,
                         productImage: freshProductData.productImage,
@@ -347,7 +355,7 @@ Widget _buildFreshProduct(context) {
                     ),
                   );
                 },
-                //productId: freshProductData.productId,
+                productId: freshProductData.productId,
                 productPrice: freshProductData.productPrice,
                 productImage: freshProductData.productImage,
                 productName: freshProductData.productName,
@@ -404,7 +412,7 @@ Widget _buildRootProduct(context) {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => ProductOverview(
-                        //productId: rootProductData.productId,
+                        productId: rootProductData.productId,
                         productPrice: rootProductData.productPrice,
                         productName: rootProductData.productName,
                         productImage: rootProductData.productImage,
@@ -412,7 +420,7 @@ Widget _buildRootProduct(context) {
                     ),
                   );
                 },
-                //productId: rootProductData.productId,
+                productId: rootProductData.productId,
                 productPrice: rootProductData.productPrice,
                 productImage: rootProductData.productImage,
                 productName: rootProductData.productName,

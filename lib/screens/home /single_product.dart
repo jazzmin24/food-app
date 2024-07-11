@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_app/config/colors.dart';
@@ -9,18 +8,16 @@ class SingleProduct extends StatefulWidget {
   final String productImage;
   final String productName;
   final String productPrice;
-  // final String productId;
+  final String productId;
   // final ProductModel productUnit;
-  SingleProduct(
-      {required this.onTap,
-      required this.productImage,
-      required this.productName,
-      required this.productPrice
-
-      //this.productId,
-      //this.productUnit,
-
-      });
+  SingleProduct({
+    required this.onTap,
+    required this.productImage,
+    required this.productName,
+    required this.productPrice,
+    required this.productId,
+    //this.productUnit,
+  });
 
   @override
   _SingleProductState createState() => _SingleProductState();
@@ -89,24 +86,55 @@ class _SingleProductState extends State<SingleProduct> {
                         Row(
                           children: [
                             Expanded(
-                                child: Container(
-                              padding: EdgeInsets.only(left: 5.w),
-                              height: 25.h,
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(8)),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                      child: Text(
-                                    '50 gram',
-                                    style: TextStyle(fontSize: 11.sp),
-                                  )),
-                                  Center(
-                                    child: Icon(Icons.arrow_drop_down,
-                                        size: 20.sp, color: primaryColor),
-                                  )
-                                ],
+                                child: InkWell(
+                              onTap: () {
+                                showModalBottomSheet(
+                                    context: context,
+                                    builder: (context) {
+                                      return Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                          ListTile(
+                                            title: new Text('250 Gram'),
+                                            onTap: () {
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                          ListTile(
+                                            title: new Text('500 Gram'),
+                                            onTap: () {
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                          ListTile(
+                                            title: new Text('1 Kg'),
+                                            onTap: () {
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    });
+                              },
+                              child: Container(
+                                padding: EdgeInsets.only(left: 5.w),
+                                height: 25.h,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.grey),
+                                    borderRadius: BorderRadius.circular(8)),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                        child: Text(
+                                      '50 gram',
+                                      style: TextStyle(fontSize: 11.sp),
+                                    )),
+                                    Center(
+                                      child: Icon(Icons.arrow_drop_down,
+                                          size: 20.sp, color: primaryColor),
+                                    )
+                                  ],
+                                ),
                               ),
                             )
                                 //  ProductUnit(
@@ -155,7 +183,12 @@ class _SingleProductState extends State<SingleProduct> {
                                 ),
                             SizedBox(width: 5.w),
 
-                            Count()
+                            Count(
+                              productImage: widget.productImage,
+                              productName: widget.productName,
+                              productPrice: widget.productPrice,
+                              productId: widget.productId,
+                            )
 
                             // Count(
                             //   productId: widget.productId,

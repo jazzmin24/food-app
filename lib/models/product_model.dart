@@ -2,16 +2,16 @@ class ProductModel {
   String productName;
   String productImage;
   String productPrice;
-  // String productId;
-  // int productQuantity;
+  String productId;
+  int productQuantity;
   // List<dynamic> productUnit;
 
   ProductModel({
     required this.productName,
     required this.productImage,
     required this.productPrice,
-    // this.productQuantity,
-    // this.productId,
+    required this.productQuantity,
+    required this.productId,
     // this.productUnit,
   });
 
@@ -21,9 +21,8 @@ class ProductModel {
       'productName': productName,
       'productImage': productImage,
       'productPrice': productPrice,
-      // Add other fields if needed
-      // 'productId': productId,
-      // 'productQuantity': productQuantity,
+      'productId': productId,
+      'productQuantity': productQuantity,
       // 'productUnit': productUnit,
     };
   }
@@ -31,15 +30,24 @@ class ProductModel {
   // Static method to create object from JSON map
   static ProductModel fromJson(Map<String, dynamic> json) {
     return ProductModel(
-      productName: json['productName'],
-      productImage: json['productImage'],
-      productPrice: json['productPrice'].toString(),
-      // Add other fields if needed
-      // productId: json['productId'],
-      // productQuantity: json['productQuantity'],
-      // productUnit: json['productUnit'],
+      productName: json['productName'] ?? '',
+      productImage: json['productImage'] ?? '',
+      productPrice: json['productPrice']?.toString() ?? '0',
+      productId: json['productId'] ?? '',
+      productQuantity: json['productQuantity'] ?? 0,
     );
   }
+  // Static method to create object from JSON map
+  // static ProductModel fromJson(Map<String, dynamic> json) {
+  //   return ProductModel(
+  //     productName: json['productName'],
+  //     productImage: json['productImage'],
+  //     productPrice: json['productPrice'].toString(),
+  //      productId: json['productId'],
+  //     productQuantity: json['productQuantity'],
+  //     // productUnit: json['productUnit'],
+  //   );
+  // }
 }
 
 

@@ -4,14 +4,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_app/auth/sign_in.dart';
 import 'package:food_app/config/colors.dart';
 import 'package:food_app/firebase_options.dart';
+import 'package:food_app/firestore_batch.dart';
 import 'package:food_app/provider/product_provider.dart';
+import 'package:food_app/provider/review_cart_provider.dart';
 import 'package:food_app/provider/user_provider.dart';
+import 'package:food_app/provider/wishlist_provider.dart';
+import 'package:food_app/screens/home%20/home_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   //  await addHerbsProductsBatch();
+  //await updateProductIds();
   runApp(const MyApp());
 }
 
@@ -28,15 +33,17 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider<ProductProvider>(
               create: (_) => ProductProvider()),
-               ChangeNotifierProvider<UserProvider>(
-              create: (_) => UserProvider())
+          ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
+          ChangeNotifierProvider<ReviewCartProvider>(
+              create: (_) => ReviewCartProvider()),
+              ChangeNotifierProvider<WishListProvider>(create: (_) => WishListProvider()),
         ],
         child: MaterialApp(
           theme: ThemeData(
               primaryColor: primaryColor,
               scaffoldBackgroundColor: scaffoldBackgroundColor),
           debugShowCheckedModeBanner: false,
-          home: const SignIn(),
+          home: const HomeScreen(),
         ),
       ),
     );

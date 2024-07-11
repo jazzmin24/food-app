@@ -1,10 +1,24 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_app/config/colors.dart';
+import 'package:food_app/models/user_model.dart';
+import 'package:food_app/provider/user_provider.dart';
+import 'package:food_app/screens/home%20/home_screen.dart';
 import 'package:food_app/screens/my_profile/my_profile.dart';
 import 'package:food_app/screens/review_cart/review_cart.dart';
+import 'package:food_app/screens/wishlist/wishlist.dart';
 
-class DrawerSide extends StatelessWidget {
+class DrawerSide extends StatefulWidget {
+  UserProvider userProvider;
+  DrawerSide({super.key, required this.userProvider});
+
+  @override
+  State<DrawerSide> createState() => _DrawerSideState();
+}
+
+class _DrawerSideState extends State<DrawerSide> {
   Widget listTile(
       {required String title,
       required IconData iconData,
@@ -23,10 +37,10 @@ class DrawerSide extends StatelessWidget {
     );
   }
 
-  const DrawerSide({super.key});
-
   @override
   Widget build(BuildContext context) {
+    var userData = widget.userProvider.currentUserData;
+
     return Drawer(
       child: Container(
         color: primaryColor,
@@ -42,10 +56,10 @@ class DrawerSide extends StatelessWidget {
                     backgroundColor: Colors.white54,
                     child: CircleAvatar(
                       backgroundColor: Colors.red,
-                      // backgroundImage: NetworkImage(
-                      //   userData.userImage ??
-                      //       "https://s3.envato.com/files/328957910/vegi_thumb.png",
-                      // ),
+                      backgroundImage: NetworkImage(
+                        userData?.userImage ??
+                            "https://s3.envato.com/files/328957910/vegi_thumb.png",
+                      ),
                       radius: 40.sp,
                     ),
                   ),
@@ -54,42 +68,36 @@ class DrawerSide extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Text(userData.userName),
-                      Text('Welcome Guest'),
+                      Text(
+                        userData!.userName,
+                        style: TextStyle(
+                            fontSize: 18.sp, fontWeight: FontWeight.bold),
+                      ),
                       SizedBox(height: 7.h),
-                      Container(
-                        height: 30.h,
-                        child: OutlinedButton(
-                          onPressed: () {},
-                          child: Text("Login"),
-                          style: OutlinedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                side: BorderSide(width: 2)),
-                          ),
-                        ),
-                      )
-
-                      // Text(
-                      //   userData.userEmail,
-                      //   overflow: TextOverflow.ellipsis,
-                      // ),
+                      Text(
+                        userData.userEmail,
+                        style: TextStyle(
+                            fontSize: 14.sp, fontWeight: FontWeight.bold),
+                        // overflow: TextOverflow.ellipsis,
+                      ),
                     ],
                   )
+
+                  //   listTile(title: Text(userData.userName), iconData: iconData)
                 ],
               ),
-              // ),
+              //),
             ),
             listTile(
               iconData: Icons.home_outlined,
               title: "Home",
-              // onTap: () {
-              //   Navigator.of(context).push(
-              //     MaterialPageRoute(
-              //       builder: (context) => HomeScreen(),
-              //     ),
-              //   );
-              // },
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => HomeScreen(),
+                  ),
+                );
+              },
             ),
             listTile(
               iconData: Icons.shop_outlined,
@@ -107,8 +115,7 @@ class DrawerSide extends StatelessWidget {
               title: "My Profile",
               onTap: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => MyProfile()
-                      ),
+                  MaterialPageRoute(builder: (context) => MyProfile(userData:userData)),
                 );
               },
             ),
@@ -116,16 +123,15 @@ class DrawerSide extends StatelessWidget {
                 iconData: Icons.notifications_outlined, title: "Notification"),
             listTile(iconData: Icons.star_outline, title: "Rating & Review"),
             listTile(
-              iconData: Icons.favorite_outline,
-              title: "Wishlist",
-              // onTap: () {
-              //   Navigator.of(context).push(
-              //     MaterialPageRoute(
-              //       builder: (context) => WishLsit(),
-              //     ),
-              //   );
-              // }
-            ),
+                iconData: Icons.favorite_outline,
+                title: "Wishlist",
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => WishList(),
+                    ),
+                  );
+                }),
             listTile(iconData: Icons.copy_outlined, title: "Raise a Complaint"),
             listTile(iconData: Icons.format_quote_outlined, title: "FAQs"),
             Container(
