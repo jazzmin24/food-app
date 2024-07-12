@@ -77,7 +77,7 @@ class _SearchState extends State<Search> {
                 productImage: data.productImage,
                 productName: data.productName,
                 productPrice: data.productPrice, productId: data.productId,
-                productQuantity: data.productQuantity,
+                productQuantity: data.productQuantity, productUnit: data.productUnit,
                 //wishList: true,
               );
             }).toList(),

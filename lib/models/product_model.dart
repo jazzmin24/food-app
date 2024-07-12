@@ -4,7 +4,7 @@ class ProductModel {
   String productPrice;
   String productId;
   int productQuantity;
-  List<dynamic> productUnit;
+  List<String> productUnit;
 
   ProductModel({
     required this.productName,
@@ -35,8 +35,8 @@ class ProductModel {
       productPrice: json['productPrice']?.toString() ?? '0',
       productId: json['productId'] ?? '',
       productQuantity: json['productQuantity'] ?? 0,
-      productUnit: json['productUnit'],
-      //productUnit: List<String>.from(json['productUnit'] ?? []
+      //productUnit: json['productUnit'],
+      productUnit: List<String>.from(json['productUnit'] ?? [])
     );
   }
 }

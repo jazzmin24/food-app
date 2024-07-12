@@ -69,25 +69,25 @@
 
 
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 
-Future<void> addProductUnitFieldToHerbsProducts() async {
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
+// Future<void> addProductUnitFieldToHerbsProducts() async {
+//   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  // Get all documents from the HerbsProduct collection
-  QuerySnapshot querySnapshot = await firestore.collection('RootProduct').get();
+//   // Get all documents from the HerbsProduct collection
+//   QuerySnapshot querySnapshot = await firestore.collection('RootProduct').get();
 
-  // Start a batch
-  WriteBatch batch = firestore.batch();
+//   // Start a batch
+//   WriteBatch batch = firestore.batch();
 
-  // Iterate through each document and add the productUnit field
-  for (QueryDocumentSnapshot doc in querySnapshot.docs) {
-    batch.update(doc.reference, {
-      'productUnit': ['250 gm', '500 gm', '1 kg']
-    });
-  }
+//   // Iterate through each document and add the productUnit field
+//   for (QueryDocumentSnapshot doc in querySnapshot.docs) {
+//     batch.update(doc.reference, {
+//       'productUnit': ['250 gm', '500 gm', '1 kg']
+//     });
+//   }
 
-  // Commit the batch
-  await batch.commit();
-  print('Batch update complete');
-}
+//   // Commit the batch
+//   await batch.commit();
+//   print('Batch update complete');
+// }

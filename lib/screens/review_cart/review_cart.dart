@@ -98,18 +98,17 @@ class ReviewCart extends StatelessWidget {
                       height: 10,
                     ),
                     SingleItem(
-                      isBool: true,
-                      //wishList: false,
-                      productImage: data.cartImage,
-                      productName: data.cartName,
-                      productPrice: data.cartPrice,
-                      productId: data.cartId,
-                      productQuantity: data.cartQuantity,
-                      // productUnit: data.cartUnit,
-                      onDelete: () {
-                        showAlertDialog(context, data);
-                      }
-                    ),
+                        isBool: true,
+                        //wishList: false,
+                        productImage: data.cartImage,
+                        productName: data.cartName,
+                        productPrice: data.cartPrice,
+                        productId: data.cartId,
+                        productQuantity: data.cartQuantity,
+                        productUnit: data.cartUnit,
+                        onDelete: () {
+                          showAlertDialog(context, data);
+                        }),
                   ],
                 );
               },

@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_app/config/colors.dart';
+import 'package:food_app/models/product_model.dart';
 import 'package:food_app/provider/review_cart_provider.dart';
 import 'package:food_app/widgets/count.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +16,7 @@ class SingleItem extends StatefulWidget {
   String productId;
   int productQuantity;
   Function()? onDelete;
+  List<String> productUnit;
 
   SingleItem(
       {required this.isBool,
@@ -24,7 +26,8 @@ class SingleItem extends StatefulWidget {
       required this.productPrice,
       this.onDelete,
       required this.productId,
-      required this.productQuantity});
+      required this.productQuantity,
+      required this.productUnit});
 
   @override
   State<SingleItem> createState() => _SingleItemState();
@@ -41,7 +44,7 @@ class _SingleItemState extends State<SingleItem> {
   @override
   Widget build(BuildContext context) {
     getCount();
-    log("/-------------$count");
+   // log("/-------------$count");
     // log("check cart Quantity ${widget.productQuantity}");
     ReviewCartProvider reviewCartProvider =
         Provider.of<ReviewCartProvider>(context);
@@ -56,7 +59,7 @@ class _SingleItemState extends State<SingleItem> {
                   child: Container(
                 height: 120.h,
                 child: Center(
-                  child: Image.network(widget.productImage!),
+                  child: Image.network(widget.productImage),
                 ),
               )),
               SizedBox(width: 13.w),
@@ -71,7 +74,7 @@ class _SingleItemState extends State<SingleItem> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(height: 5.h),
-                          Text(widget.productName!,
+                          Text(widget.productName,
                               style: TextStyle(
                                   color: textColor,
                                   fontWeight: FontWeight.bold)),
@@ -123,7 +126,7 @@ class _SingleItemState extends State<SingleItem> {
                                       children: [
                                         Expanded(
                                             child: Text(
-                                          '50 Gram',
+                                        '${widget.productUnit}',
                                           style: TextStyle(
                                               color: Colors.grey,
                                               fontSize: 14.sp),
@@ -140,7 +143,7 @@ class _SingleItemState extends State<SingleItem> {
                               : Padding(
                                   padding: EdgeInsets.only(bottom: 12.h),
                                   child: Text(
-                                    '50 Gram',
+                                    '${widget.productUnit}',
                                     style: TextStyle(
                                         fontWeight: FontWeight.w700,
                                         fontSize: 14.sp),

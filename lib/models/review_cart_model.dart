@@ -1,10 +1,12 @@
+import 'package:food_app/models/product_model.dart';
+
 class ReviewCartModel {
   String cartId;
   String cartName;
   String cartImage;
   String cartPrice;
   int cartQuantity;
-  // var cartUnit;
+  var cartUnit;
 
   ReviewCartModel({
     required this.cartId,
@@ -12,7 +14,7 @@ class ReviewCartModel {
     required this.cartImage,
     required this.cartPrice,
     required this.cartQuantity,
-    // this.cartUnit,
+    required this.cartUnit,
   });
 
   // Method to convert object to JSON map
@@ -23,7 +25,7 @@ class ReviewCartModel {
       'cartImage': cartImage,
       'cartPrice': cartPrice,
       'cartQuantity': cartQuantity,
-      // 'cartUnit': cartUnit,
+       'cartUnit': cartUnit,
     };
   }
 
@@ -35,7 +37,7 @@ class ReviewCartModel {
       cartImage: json['cartImage'],
       cartPrice: json['cartPrice'],
       cartQuantity: json['cartQuantity'],
-      // cartUnit: json['cartUnit'],
+       cartUnit: json['cartUnit'],
     );
   }
 }

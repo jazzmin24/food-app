@@ -77,6 +77,7 @@ class _WishListState extends State<WishList> {
               SizedBox(height: 10.h),
               SingleItem(
                 isBool: true,
+                productUnit: data.productUnit,
                 //wishList: true,
                 productImage: data.productImage,
                 productName: data.productName,

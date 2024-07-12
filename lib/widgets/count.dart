@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_app/config/colors.dart';
+import 'package:food_app/models/product_model.dart';
 import 'package:food_app/provider/review_cart_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +14,8 @@ class Count extends StatefulWidget {
   final String productName;
   final String productPrice;
   final String productId;
+  List<String>? productUnit;
+  // var productUnit;
 
   Count({
     super.key,
@@ -20,6 +23,7 @@ class Count extends StatefulWidget {
     required this.productName,
     required this.productPrice,
     required this.productId,
+   // required this.productUnit,
   });
 
   @override
@@ -118,6 +122,7 @@ class _CountState extends State<Count> {
                     cartImage: widget.productImage,
                     cartPrice: widget.productPrice,
                     cartQuantity: count,
+                    cartUnit: widget.productUnit
                   );
                 },
                 child: Text(

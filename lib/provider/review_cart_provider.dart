@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:food_app/models/product_model.dart';
 import 'package:food_app/models/review_cart_model.dart';
 
 class ReviewCartProvider extends ChangeNotifier {
@@ -11,6 +12,7 @@ class ReviewCartProvider extends ChangeNotifier {
     required String cartImage,
     required String cartPrice,
     required int cartQuantity,
+    required var cartUnit
   }) async {
     await FirebaseFirestore.instance
         .collection("ReviewCart")
@@ -24,7 +26,8 @@ class ReviewCartProvider extends ChangeNotifier {
         "cartImage": cartImage,
         "cartPrice": cartPrice,
         "cartQuantity": cartQuantity,
-        "isAdd":true
+        "isAdd":true,
+         "cartUnit":cartUnit
       },
     );
   }
@@ -37,6 +40,7 @@ class ReviewCartProvider extends ChangeNotifier {
     required String cartImage,
     required String cartPrice,
     required int cartQuantity,
+    
   }) async {
     await FirebaseFirestore.instance
         .collection("ReviewCart")
@@ -50,7 +54,8 @@ class ReviewCartProvider extends ChangeNotifier {
         "cartImage": cartImage,
         "cartPrice": cartPrice,
         "cartQuantity": cartQuantity,
-        "isAdd":true
+        "isAdd":true,
+       
       },
     );
   }
