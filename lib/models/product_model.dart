@@ -4,7 +4,7 @@ class ProductModel {
   String productPrice;
   String productId;
   int productQuantity;
-  // List<dynamic> productUnit;
+  List<dynamic> productUnit;
 
   ProductModel({
     required this.productName,
@@ -12,7 +12,7 @@ class ProductModel {
     required this.productPrice,
     required this.productQuantity,
     required this.productId,
-    // this.productUnit,
+    required this.productUnit,
   });
 
   // Method to convert object to JSON map
@@ -23,7 +23,7 @@ class ProductModel {
       'productPrice': productPrice,
       'productId': productId,
       'productQuantity': productQuantity,
-      // 'productUnit': productUnit,
+      'productUnit': productUnit,
     };
   }
 
@@ -35,19 +35,10 @@ class ProductModel {
       productPrice: json['productPrice']?.toString() ?? '0',
       productId: json['productId'] ?? '',
       productQuantity: json['productQuantity'] ?? 0,
+      productUnit: json['productUnit'],
+      //productUnit: List<String>.from(json['productUnit'] ?? []
     );
   }
-  // Static method to create object from JSON map
-  // static ProductModel fromJson(Map<String, dynamic> json) {
-  //   return ProductModel(
-  //     productName: json['productName'],
-  //     productImage: json['productImage'],
-  //     productPrice: json['productPrice'].toString(),
-  //      productId: json['productId'],
-  //     productQuantity: json['productQuantity'],
-  //     // productUnit: json['productUnit'],
-  //   );
-  // }
 }
 
 

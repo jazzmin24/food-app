@@ -203,25 +203,69 @@ class _SingleItemState extends State<SingleItem> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Icon(
-                                        Icons.remove,
-                                        size: 20.sp,
-                                        color: primaryColor,
+                                      InkWell(
+                                        onTap: () {
+                                          if (count == 1) {
+                                            log('message');
+                                            // Fluttertoast.showToast(
+                                            //     msg:
+                                            //         "You reach the maximum limit");
+                                          } else {
+                                            setState(() {
+                                              count--;
+                                            });
+                                            reviewCartProvider
+                                                .updateReviewCartData(
+                                                    cartId: widget.productId,
+                                                    cartName:
+                                                        widget.productName,
+                                                    cartImage:
+                                                        widget.productImage,
+                                                    cartPrice:
+                                                        widget.productPrice,
+                                                    cartQuantity: count);
+                                          }
+                                        },
+                                        child: Icon(
+                                          Icons.remove,
+                                          size: 20.sp,
+                                          color: primaryColor,
+                                        ),
                                       ),
                                       Padding(
                                         padding: EdgeInsets.symmetric(
                                             horizontal: 8.h),
                                         child: Text(
-                                          '1',
+                                          "$count",
+                                          // '1',
                                           style: TextStyle(
                                               color: Colors.grey,
                                               fontSize: 16.sp),
                                         ),
                                       ),
-                                      Icon(
-                                        Icons.add,
-                                        size: 20.sp,
-                                        color: primaryColor,
+                                      InkWell(
+                                        onTap: () {
+                                          if (count < 5) {
+                                            setState(() {
+                                              count++;
+                                            });
+                                            reviewCartProvider
+                                                .updateReviewCartData(
+                                                    cartId: widget.productId,
+                                                    cartName:
+                                                        widget.productName,
+                                                    cartImage:
+                                                        widget.productImage,
+                                                    cartPrice:
+                                                        widget.productPrice,
+                                                    cartQuantity: count);
+                                          }
+                                        },
+                                        child: Icon(
+                                          Icons.add,
+                                          size: 20.sp,
+                                          color: primaryColor,
+                                        ),
                                       ),
                                     ],
                                   ),
