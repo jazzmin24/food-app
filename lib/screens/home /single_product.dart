@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,7 +15,7 @@ class SingleProduct extends StatefulWidget {
   final String productPrice;
   final String productId;
   //final productUnit;
-  List<String> productUnit;
+  ProductModel productUnit;
   SingleProduct({
     required this.onTap,
     required this.productImage,
@@ -33,7 +34,7 @@ class _SingleProductState extends State<SingleProduct> {
   var firstValue;
   @override
   Widget build(BuildContext context) {
-    widget.productUnit.firstWhere((element) {
+    widget.productUnit.productUnit.firstWhere((element) {
       setState(() {
         firstValue = element;
       });
@@ -106,7 +107,7 @@ class _SingleProductState extends State<SingleProduct> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: widget
-                                                    .productUnit
+                                                    .productUnit.productUnit
                                                     .map<Widget>((data) {
                                                   return Column(
                                                     children: [
@@ -149,62 +150,10 @@ class _SingleProductState extends State<SingleProduct> {
                                             );
                                           });
                                     },
-                                    title: unitData ?? firstValue)
-                                // title: unitData==null?firstValue:unitData
-                                //Use the '??' operator rather than '?:' when testing for 'null'.
-                                // InkWell(
-                                //   onTap: () {
-                                //     showModalBottomSheet(
-                                //         context: context,
-                                //         builder: (context) {
-                                //           return Column(
-                                //             mainAxisSize: MainAxisSize.min,
-                                //             children: <Widget>[
-                                //               ListTile(
-                                //                 title: new Text('250 Gram'),
-                                //                 onTap: () {
-                                //                   Navigator.pop(context);
-                                //                 },
-                                //               ),
-                                //               ListTile(
-                                //                 title: new Text('500 Gram'),
-                                //                 onTap: () {
-                                //                   Navigator.pop(context);
-                                //                 },
-                                //               ),
-                                //               ListTile(
-                                //                 title: new Text('1 Kg'),
-                                //                 onTap: () {
-                                //                   Navigator.pop(context);
-                                //                 },
-                                //               ),
-                                //             ],
-                                //           );
-                                //         });
-                                //   },
-                                //   child: Container(
-                                //     padding: EdgeInsets.only(left: 5.w),
-                                //     height: 25.h,
-                                //     decoration: BoxDecoration(
-                                //         border: Border.all(color: Colors.grey),
-                                //         borderRadius: BorderRadius.circular(8)),
-                                //     child: Row(
-                                //       children: [
-                                //         Expanded(
-                                //             child: Text(
-                                //           '50 gram',
-                                //           style: TextStyle(fontSize: 11.sp),
-                                //         )),
-                                //         Center(
-                                //           child: Icon(Icons.arrow_drop_down,
-                                //               size: 20.sp, color: primaryColor),
-                                //         )
-                                //       ],
-                                //     ),
-                                //   ),
-                                // )
-                                //
-
+                                    title: unitData == null
+                                        ? firstValue
+                                        : unitData)
+//?? firstValue
                                 ),
                             SizedBox(width: 5.w),
 
@@ -213,6 +162,7 @@ class _SingleProductState extends State<SingleProduct> {
                               productName: widget.productName,
                               productPrice: widget.productPrice,
                               productId: widget.productId,
+                              productUnit:  unitData == null ? firstValue : unitData,
                             )
 
                             // Count(

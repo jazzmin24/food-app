@@ -16,8 +16,8 @@ class SingleItem extends StatefulWidget {
   String productId;
   int productQuantity;
   Function()? onDelete;
-  List<String> productUnit;
-
+  //List<String> productUnit;
+  var productUnit;
   SingleItem(
       {required this.isBool,
       this.wishlist,
@@ -44,7 +44,7 @@ class _SingleItemState extends State<SingleItem> {
   @override
   Widget build(BuildContext context) {
     getCount();
-   // log("/-------------$count");
+    // log("/-------------$count");
     // log("check cart Quantity ${widget.productQuantity}");
     ReviewCartProvider reviewCartProvider =
         Provider.of<ReviewCartProvider>(context);
@@ -126,7 +126,7 @@ class _SingleItemState extends State<SingleItem> {
                                       children: [
                                         Expanded(
                                             child: Text(
-                                        '${widget.productUnit}',
+                                          '${widget.productUnit}',
                                           style: TextStyle(
                                               color: Colors.grey,
                                               fontSize: 14.sp),

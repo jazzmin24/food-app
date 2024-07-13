@@ -292,7 +292,7 @@ Widget _buildHerbsProduct(context) {
                 productPrice: herbsProductData.productPrice,
                 productImage: herbsProductData.productImage,
                 productName: herbsProductData.productName,
-                productUnit: herbsProductData.productUnit,
+                productUnit: herbsProductData,
               );
             },
           ).toList(),
@@ -357,7 +357,7 @@ Widget _buildFreshProduct(context) {
                 productPrice: freshProductData.productPrice,
                 productImage: freshProductData.productImage,
                 productName: freshProductData.productName,
-                productUnit: freshProductData.productUnit,
+                productUnit: freshProductData,
               );
             },
           ).toList(),
@@ -422,7 +422,7 @@ Widget _buildRootProduct(context) {
                 productPrice: rootProductData.productPrice,
                 productImage: rootProductData.productImage,
                 productName: rootProductData.productName,
-                productUnit: rootProductData.productUnit,
+                productUnit: rootProductData,
               );
             },
           ).toList(),

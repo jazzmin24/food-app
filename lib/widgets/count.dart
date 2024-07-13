@@ -14,8 +14,8 @@ class Count extends StatefulWidget {
   final String productName;
   final String productPrice;
   final String productId;
-  List<String>? productUnit;
-  // var productUnit;
+  //List<String>? productUnit;
+   var productUnit;
 
   Count({
     super.key,
@@ -23,7 +23,7 @@ class Count extends StatefulWidget {
     required this.productName,
     required this.productPrice,
     required this.productId,
-   // required this.productUnit,
+    this.productUnit,
   });
 
   @override
