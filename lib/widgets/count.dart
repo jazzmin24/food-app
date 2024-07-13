@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_app/config/colors.dart';
-import 'package:food_app/models/product_model.dart';
 import 'package:food_app/provider/review_cart_provider.dart';
 import 'package:provider/provider.dart';
 
