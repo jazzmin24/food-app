@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_app/config/colors.dart';
 import 'package:food_app/firebase_options.dart';
+import 'package:food_app/provider/checkout_provider.dart';
 import 'package:food_app/provider/product_provider.dart';
 import 'package:food_app/provider/review_cart_provider.dart';
 import 'package:food_app/provider/user_provider.dart';
@@ -30,13 +31,11 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       child: MultiProvider(
         providers: [
-          ChangeNotifierProvider<ProductProvider>(
-              create: (_) => ProductProvider()),
+          ChangeNotifierProvider<ProductProvider>(create: (_) => ProductProvider()),
           ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
-          ChangeNotifierProvider<ReviewCartProvider>(
-              create: (_) => ReviewCartProvider()),
-          ChangeNotifierProvider<WishListProvider>(
-              create: (_) => WishListProvider()),
+          ChangeNotifierProvider<ReviewCartProvider>(create: (_) => ReviewCartProvider()),
+          ChangeNotifierProvider<WishListProvider>(create: (_) => WishListProvider()),
+          ChangeNotifierProvider<CheckoutProvider>(create: (_) => CheckoutProvider()),
         ],
         child: MaterialApp(
           theme: ThemeData(

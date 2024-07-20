@@ -1,9 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_app/config/colors.dart';
-import 'package:food_app/models/user_model.dart';
 import 'package:food_app/provider/user_provider.dart';
 import 'package:food_app/screens/home%20/home_screen.dart';
 import 'package:food_app/screens/my_profile/my_profile.dart';

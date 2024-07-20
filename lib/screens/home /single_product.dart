@@ -1,6 +1,3 @@
-import 'dart:developer';
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_app/config/colors.dart';
@@ -38,7 +35,7 @@ class _SingleProductState extends State<SingleProduct> {
       setState(() {
         firstValue = element;
       });
-      log("Product Units: ${widget.productUnit.toString()}");
+      //log("Product Units: ${widget.productUnit.toString()}");
       return true;
     });
     return SingleChildScrollView(
@@ -162,7 +159,8 @@ class _SingleProductState extends State<SingleProduct> {
                               productName: widget.productName,
                               productPrice: widget.productPrice,
                               productId: widget.productId,
-                              productUnit:  unitData == null ? firstValue : unitData,
+                              productUnit:
+                                  unitData == null ? firstValue : unitData,
                             )
 
                             // Count(
