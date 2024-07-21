@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_app/config/colors.dart';
 import 'package:food_app/provider/checkout_provider.dart';
+import 'package:food_app/screens/check%20out/google%20map/custom_google_map.dart';
 import 'package:food_app/widgets/custom_text_field.dart';
 import 'package:provider/provider.dart';
 
@@ -99,11 +100,11 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
             ),
             InkWell(
               onTap: () {
-                // Navigator.of(context).push(
-                //   MaterialPageRoute(
-                //     builder: (context) => CustomGoogleMap(),
-                //   ),
-                // );
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => CustomGoogleMap(),
+                  ),
+                );
               },
               child: Container(
                 height: 47.h,

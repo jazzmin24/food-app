@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:food_app/auth/sign_in.dart';
 import 'package:food_app/config/colors.dart';
 import 'package:food_app/firebase_options.dart';
 import 'package:food_app/provider/checkout_provider.dart';
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
               primaryColor: primaryColor,
               scaffoldBackgroundColor: scaffoldBackgroundColor),
           debugShowCheckedModeBanner: false,
-          home: const HomeScreen(),
+          home: const SignIn(),
         ),
       ),
     );
