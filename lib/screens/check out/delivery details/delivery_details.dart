@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_app/config/colors.dart';
 import 'package:food_app/screens/check%20out/add%20delivery%20address/add_delivery_address.dart';
 import 'package:food_app/screens/check%20out/delivery%20details/single_delivery_item.dart';
+import 'package:food_app/screens/check%20out/payment%20summary/payment_summary.dart';
 
 class DeliveryDetails extends StatefulWidget {
   @override
@@ -33,38 +34,6 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
             ),
           );
         },
-      ),
-      bottomNavigationBar: Container(
-        // width: 160,
-        height: 48.h,
-        margin: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
-        child: MaterialButton(
-          child: Text("Add new Address"),
-          //deliveryAddressProvider.getDeliveryAddressList.isEmpty?
-          //Text("Add new Address")
-          //: Text("Payment Summary"),
-          onPressed: () {
-            // deliveryAddressProvider.getDeliveryAddressList.isEmpty
-            //     ?
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => AddDeliveryAddress(),
-              ),
-            );
-            //     :
-            // Navigator.of(context).push(
-            //         MaterialPageRoute(
-            //           builder: (context) => PaymentSummary(
-            //             deliverAddressList: value,
-            //           ),
-            //         ),
-            //       );
-          },
-          color: primaryColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
-        ),
       ),
       body: ListView(
         children: [
@@ -118,6 +87,38 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
             ],
           )
         ],
+      ),
+      bottomNavigationBar: Container(
+        // width: 160,
+        height: 48.h,
+        margin: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
+        child: MaterialButton(
+          child: Text("Payment Summary"),
+          //deliveryAddressProvider.getDeliveryAddressList.isEmpty?
+          //Text("Add new Address")
+          //: Text("Payment Summary"),
+          onPressed: () {
+            // deliveryAddressProvider.getDeliveryAddressList.isEmpty
+            //     ?
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => PaymentSummary(),
+              ),
+            );
+            //     :
+            // Navigator.of(context).push(
+            //         MaterialPageRoute(
+            //           builder: (context) => PaymentSummary(
+            //             deliverAddressList: value,
+            //           ),
+            //         ),
+            //       );
+          },
+          color: primaryColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+        ),
       ),
     );
   }

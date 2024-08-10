@@ -3,12 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_app/config/colors.dart';
 import 'package:food_app/provider/review_cart_provider.dart';
 import 'package:food_app/screens/check%20out/delivery%20details/single_delivery_item.dart';
+import 'package:food_app/screens/check%20out/payment%20summary/my_google_pay.dart';
 import 'package:food_app/screens/check%20out/payment%20summary/order_item.dart';
 import 'package:food_app/screens/my_profile/my_profile.dart';
 import 'package:provider/provider.dart';
 
 class PaymentSummary extends StatefulWidget {
-  //final DeliveryAddressModel deliverAddressList;
+  // final DeliveryAddressModel deliverAddressList;
   // PaymentSummary({
   //  this.deliverAddressList
   //   });
@@ -30,15 +31,6 @@ class _PaymentSummaryState extends State<PaymentSummary> {
     ReviewCartProvider reviewCartProvider = Provider.of(context);
     reviewCartProvider.getReviewCartData();
 
-    //  double discount = 30;
-    //  double discountValue;
-    //  double shippingCharge = 3.7;
-    //  //double total;
-    //  double totalPrice = reviewCartProvider.getTotalPrice();
-    // if (totalPrice > 300) {
-    //   discountValue = (totalPrice * discount) / 100;
-    //   double total = totalPrice - discountValue;
-    // }
     double discount = 30;
     double discountValue = 0;
     double shippingCharge = 3.7;
@@ -46,11 +38,9 @@ class _PaymentSummaryState extends State<PaymentSummary> {
     double total;
 
     if (totalPrice > 300) {
-      discountValue = (totalPrice * discount)/ 100;
+      discountValue = (totalPrice * discount) / 100;
     }
     total = totalPrice - discountValue + shippingCharge;
-
-
 
     return Scaffold(
       appBar: AppBar(
@@ -58,44 +48,6 @@ class _PaymentSummaryState extends State<PaymentSummary> {
         title: Text(
           "Payment Summary",
           style: TextStyle(color: textColor, fontSize: 18.sp),
-        ),
-      ),
-      bottomNavigationBar: ListTile(
-        title: Text("Total Amount"),
-        subtitle: Text(
-          '\$1200',
-          // "\$${total + 5 ?? totalPrice}",
-          style: TextStyle(
-            color: Colors.green[900],
-            fontWeight: FontWeight.bold,
-            fontSize: 17.sp,
-          ),
-        ),
-        trailing: Container(
-          width: 160.w,
-          child: MaterialButton(
-            onPressed: () {
-              // myType == AddressTypes.OnlinePayment
-              //     ? Navigator.of(context).push(
-              //         MaterialPageRoute(
-              //           builder: (context) => MyGooglePay(
-              //             total: total,
-              //           ),
-              //         ),
-              //       )
-              //     : Container();
-            },
-            child: Text(
-              "Place Order",
-              style: TextStyle(
-                color: textColor,
-              ),
-            ),
-            color: primaryColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30),
-            ),
-          ),
         ),
       ),
       body: Padding(
@@ -212,6 +164,45 @@ class _PaymentSummaryState extends State<PaymentSummary> {
           },
         ),
       ),
+    bottomNavigationBar: ListTile(
+        title: Text("Total Amount"),
+        subtitle: Text(
+          '$total',
+          // "\$${total + 5 ?? totalPrice}",
+          style: TextStyle(
+            color: Colors.green[900],
+            fontWeight: FontWeight.bold,
+            fontSize: 17.sp,
+          ),
+        ),
+        trailing: Container(
+          width: 160.w,
+          child: MaterialButton(
+            onPressed: () {
+              myType == AddressTypes.OnlinePayment
+                  ? Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => MyGooglePay(
+                          total: total,
+                        ),
+                      ),
+                    )
+                  : Container();
+            },
+            child: Text(
+              "Place Order",
+              style: TextStyle(
+                color: textColor,
+              ),
+            ),
+            color: primaryColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+          ),
+        ),
+      ),
+     
     );
   }
 }
