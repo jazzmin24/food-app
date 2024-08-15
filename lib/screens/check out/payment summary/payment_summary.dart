@@ -4,6 +4,7 @@ import 'package:food_app/config/colors.dart';
 import 'package:food_app/provider/review_cart_provider.dart';
 import 'package:food_app/screens/check%20out/delivery%20details/single_delivery_item.dart';
 import 'package:food_app/screens/check%20out/payment%20summary/my_google_pay.dart';
+import 'package:food_app/screens/check%20out/payment%20summary/my_razorpay.dart';
 import 'package:food_app/screens/check%20out/payment%20summary/order_item.dart';
 import 'package:food_app/screens/my_profile/my_profile.dart';
 import 'package:provider/provider.dart';
@@ -164,7 +165,7 @@ class _PaymentSummaryState extends State<PaymentSummary> {
           },
         ),
       ),
-    bottomNavigationBar: ListTile(
+      bottomNavigationBar: ListTile(
         title: Text("Total Amount"),
         subtitle: Text(
           '$total',
@@ -187,7 +188,11 @@ class _PaymentSummaryState extends State<PaymentSummary> {
                         ),
                       ),
                     )
-                  : Container();
+                  : Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => MyRazorpay(),
+                      ),
+                    );
             },
             child: Text(
               "Place Order",
@@ -202,7 +207,6 @@ class _PaymentSummaryState extends State<PaymentSummary> {
           ),
         ),
       ),
-     
     );
   }
 }
