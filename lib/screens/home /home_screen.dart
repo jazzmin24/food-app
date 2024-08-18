@@ -28,8 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
           .fetchFreshProductData();
       Provider.of<ProductProvider>(context, listen: false)
           .fetchRootProductData();
-                Provider.of<UserProvider>(context, listen: false).getUserData();
-
+      Provider.of<UserProvider>(context, listen: false).getUserData();
     });
     super.initState();
 
@@ -39,9 +38,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    UserProvider userProvider =
-        Provider.of<UserProvider>(context);
-       return Scaffold(
+    UserProvider userProvider = Provider.of<UserProvider>(context);
+    return Scaffold(
       drawer: DrawerSide(userProvider: userProvider),
       appBar: AppBar(
         iconTheme: IconThemeData(color: textColor),
@@ -95,7 +93,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         backgroundColor: primaryColor,
       ),
-      
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
         child: ListView(
@@ -106,7 +103,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: NetworkImage(
-                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQi0Xg-k622Sbztlrb-L1o1CAla3zCbVc2lUw&usqp=CAU'),
+                      'https://imgs.search.brave.com/T1iHe6WPcBcImF_GU8dWJOzwKxTxUMCuaIV60mOECz8/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvOTU2/NzYxMjc0L3Bob3Rv/L21peGVkLWJlcnJp/ZXMuanBnP3M9NjEy/eDYxMiZ3PTAmaz0y/MCZjPTNjLVdUemtl/aVFzSm5DcVlYTlJU/YlVvRlJQcUx3YzZs/SFZKU0FDR3M3MFk9'
+                      //'https://imgs.search.brave.com/BVtOMO95qCuqKPxyUcQqG1skTNkaksxwbsny8JrwAg8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvZmVhdHVy/ZWQvZnJ1aXRzLWFu/ZC12ZWdldGFibGVz/LTdnNmtrY3k0N3I0/dGgyZTMuanBn'
+                      ),
                 ),
                 color: Colors.red,
                 borderRadius: BorderRadius.circular(10),
@@ -153,17 +152,17 @@ class _HomeScreenState extends State<HomeScreen> {
                               '30% Off',
                               style: TextStyle(
                                 fontSize: 40.sp,
-                                color: Colors.green[100],
+                                color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 shadows: [
                                   Shadow(
                                     blurRadius: 10.sp,
-                                    color: Colors.green.withOpacity(0.7),
+                                    color: Colors.green.withOpacity(0.9),
                                     offset: Offset(0, 0),
                                   ),
                                   Shadow(
                                     blurRadius: 20.sp,
-                                    color: Colors.green.withOpacity(0.5),
+                                    color: Colors.green.withOpacity(0.9),
                                     offset: Offset(0, 0),
                                   ),
                                 ],
@@ -195,7 +194,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-   
     );
   }
 }

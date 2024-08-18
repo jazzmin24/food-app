@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:food_app/config/colors.dart';
 import 'package:food_app/provider/review_cart_provider.dart';
 import 'package:food_app/widgets/count.dart';
@@ -209,9 +210,9 @@ class _SingleItemState extends State<SingleItem> {
                                         onTap: () {
                                           if (count == 1) {
                                             log('message');
-                                            // Fluttertoast.showToast(
-                                            //     msg:
-                                            //         "You reach the maximum limit");
+                                            Fluttertoast.showToast(
+                                                msg:
+                                                    "You reach the maximum limit");
                                           } else {
                                             setState(() {
                                               count--;

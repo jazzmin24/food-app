@@ -80,10 +80,10 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
           Column(
             children: [
               SingleDeliveryItem(
-                  title: 'title',
+                  title: 'Marcus',
                   addressType: 'Home',
-                  address: 'address',
-                  number: '6')
+                  address: '777 Dunsmuir Street, Vancouver',
+                  number: '96436xxxxx')
             ],
           )
         ],

@@ -139,8 +139,11 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
                 Icons.home,
                 color: primaryColor,
               ),
+              //activeColor: Colors.black,
+              activeColor: primaryColor,
             ),
             RadioListTile(
+              activeColor: primaryColor,
               value: AddressTypes.Work,
               groupValue: myType,
               title: Text("Work"),
@@ -155,6 +158,7 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
               ),
             ),
             RadioListTile(
+              activeColor: primaryColor,
               value: AddressTypes.Other,
               groupValue: myType,
               title: Text("Other"),

@@ -47,9 +47,10 @@ class _SingleProductState extends State<SingleProduct> {
             height: 237.h,
             width: 165.w,
             decoration: BoxDecoration(
-              color: Color(0xffd9dad9),
-              borderRadius: BorderRadius.circular(10),
-            ),
+                //  color: Color(0xffd9dad9),
+                color: Color.fromARGB(255, 240, 240, 240),
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Color.fromARGB(255, 194, 194, 194))),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

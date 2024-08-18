@@ -4,7 +4,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class MyRazorpay extends StatefulWidget {
-  const MyRazorpay({super.key});
+ 
+  const MyRazorpay({super.key,});
 
   @override
   State<MyRazorpay> createState() => _MyRazorpayState();
@@ -43,6 +44,7 @@ class _MyRazorpayState extends State<MyRazorpay> {
               var options = {
                 'key': 'rzp_test_GcZZFDPP0jHtC4',
                 'amount': 10000,
+                //"${widget.total}",
                 'name': 'Acme Corp.',
                 'description': 'Fine T-Shirt',
                 'prefill': {
@@ -52,7 +54,8 @@ class _MyRazorpayState extends State<MyRazorpay> {
               };
               razorpay.open(options);
             },
-            child: Text('10')),
+            child: Text('10')
+            ),
       ),
     );
   }
